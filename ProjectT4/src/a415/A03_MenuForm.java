@@ -89,12 +89,13 @@ public class A03_MenuForm extends JFrame {
 				DatabaseHelper.urmVOList.add(new UserRsvMenuVO(-1, DatabaseHelper.userRsvVO.getUserRsvId(), menuId, menuCount)); 
 			});
 
-			System.out.println("<MenuFrom PrintOut>");
-			System.out.println("UserId: " + DatabaseHelper.userRsvVO.getUserId());
-			System.out.println("RestId: " + DatabaseHelper.userRsvVO.getRestId());
-			for (UserRsvMenuVO VOItem : DatabaseHelper.urmVOList) {
-				System.out.println("menuId: " + VOItem.getMenuId() + " / " + "menuCount: " + VOItem.getMenuCount());
-			}
+			// 콘솔확인용 //////////////
+//			System.out.println("<MenuForm PrintOut>");
+//			System.out.println("UserId: " + DatabaseHelper.userRsvVO.getUserId());
+//			System.out.println("RestId: " + DatabaseHelper.userRsvVO.getRestId());
+//			for (UserRsvMenuVO VOItem : DatabaseHelper.urmVOList) {
+//				System.out.println("menuId: " + VOItem.getMenuId() + " / " + "menuCount: " + VOItem.getMenuCount());
+//			}
 
 			dispose();
 			new A04_ReserveForm().setVisible(true);
@@ -143,11 +144,6 @@ public class A03_MenuForm extends JFrame {
 
 		JButton[] buttons = new JButton[map.size()]; ////////////////
 		int index = 0;
-
-		// 확인 /////////
-//		System.out.println("foodNames : " + foodNames);
-//		System.out.println("foodPrices : " + foodPrices);
-//		System.out.println("foodImages : " + foodImages);
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 4; col++) {
 				if (index >= foodNames.size())
@@ -168,10 +164,6 @@ public class A03_MenuForm extends JFrame {
 
 				contentPane.add(buttons[index]);
 
-				// 확인 /////////
-//				System.out.println(foodNames.get(index));
-//				System.out.println(foodImages.get(index).toString() + " ");
-				////////////////
 
 				// 메뉴 이름 텍스트 필드
 				JTextField foodLabel = new JTextField(food);
@@ -201,14 +193,18 @@ public class A03_MenuForm extends JFrame {
 		int count = clickCountMap.getOrDefault(food, 0) + 1;
 		count = clickCountMap.getOrDefault(food, 0) + 1;
 		clickCountMap.put(food, count);
-
-		menuIdMenuCountMap.put(index + 12 * (restId - 1) + 1, count); //////////////////
+		// <메뉴 아이디, 수량> 추가 >> DB 저장용
+		menuIdMenuCountMap.put(index + 12 * (restId - 1) + 1, count); 
 
 		// 화면에 표시할 텍스트 업데이트
-		String displayText = (count > 1) ? food + " (" + count + ") - " + price + "원" : food + " - " + price + "원";
+		String displayText = (count > 1) ? food 
+				+ " (" + count + ") - " 
+				+ price + "원" 
+				: food + " - " 
+				+ price + "원";
 		String currentText = textA.getText().trim();
 		StringBuilder updatedText = new StringBuilder();
-
+		
 		boolean updated = false;
 		for (String item : currentText.split(",\\s*")) {
 			if (!item.isBlank()) {
