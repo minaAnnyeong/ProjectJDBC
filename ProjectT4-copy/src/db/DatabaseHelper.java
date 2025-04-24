@@ -18,26 +18,6 @@ public class DatabaseHelper {
 
 	public static ArrayList<UserRsvMenuVO> urmVOList = new ArrayList<UserRsvMenuVO>(); // 위 메뉴정보의 List
 	
-//	public static HashMap<Integer, MenuInfo> map = new HashMap<Integer, MenuInfo>();
-
-	/*
-	 * // 예약 정보를 데이터베이스에 삽입하는 메소드 public static boolean insertUserReservation(String
-	 * userId, int restId, int userCount, java.sql.Timestamp revTime) throws
-	 * ClassNotFoundException { String sql =
-	 * "INSERT INTO user_rsv (user_rsv_id, user_id, rest_id, user_count, rev_time) "
-	 * + "VALUES (user_rsv_seq.NEXTVAL, ?, ?, ?, ?)";
-	 * 
-	 * try (Connection conn = DBConn.getConnection(); PreparedStatement stmt =
-	 * conn.prepareStatement(sql)) {
-	 * 
-	 * stmt.setString(1, userId); stmt.setInt(2, restId); stmt.setInt(3, userCount);
-	 * stmt.setTimestamp(4, revTime);
-	 * 
-	 * int rowsAffected = stmt.executeUpdate(); return rowsAffected > 0;
-	 * 
-	 * } catch (SQLException e) { System.err.println("예약 정보 삽입 오류: " +
-	 * e.getMessage()); return false; } }
-	 */
 
 	// 예약 정보를 데이터베이스에 삽입하는 메소드
 	public static boolean insertUserReservation(UserRsvVO userRsvVO) throws ClassNotFoundException {
@@ -60,31 +40,27 @@ public class DatabaseHelper {
 		}
 	}
 
-	// 특정 사용자의 예약 목록을 조회하는 메소드
-	public static void getUserReservations(String userId) {
-		String sql = "SELECT * FROM user_rsv WHERE user_id = ?";
-
-		try (Connection conn = DBConn.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-			stmt.setString(1, userId); // 사용자의 ID로 예약 정보 조회
-
-			try (ResultSet rs = stmt.executeQuery()) {
-				while (rs.next()) {
-					int userRsvId = rs.getInt("user_rsv_id");
-					int restId = rs.getInt("rest_id");
-					int userCount = rs.getInt("user_count");
-					java.sql.Timestamp revTime = rs.getTimestamp("rev_time");
-
-					// 예약 정보 출력
-					System.out.println("Reservation ID: " + userRsvId + ", Restaurant ID: " + restId + ", User Count: "
-							+ userCount + ", Reservation Time: " + revTime);
-				}
-			}
-
-		} catch (SQLException e) {
-			System.err.println("사용자 예약 정보 조회 오류: " + e.getMessage());
-		}
-	}
+	/*
+	 * // 특정 사용자의 예약 목록을 조회하는 메소드 public static void getUserReservations(String
+	 * userId) { String sql = "SELECT * FROM user_rsv WHERE user_id = ?";
+	 * 
+	 * try (Connection conn = DBConn.getConnection(); PreparedStatement stmt =
+	 * conn.prepareStatement(sql)) {
+	 * 
+	 * stmt.setString(1, userId); // 사용자의 ID로 예약 정보 조회
+	 * 
+	 * try (ResultSet rs = stmt.executeQuery()) { while (rs.next()) { int userRsvId
+	 * = rs.getInt("user_rsv_id"); int restId = rs.getInt("rest_id"); int userCount
+	 * = rs.getInt("user_count"); java.sql.Timestamp revTime =
+	 * rs.getTimestamp("rev_time");
+	 * 
+	 * // 예약 정보 출력 System.out.println("Reservation ID: " + userRsvId +
+	 * ", Restaurant ID: " + restId + ", User Count: " + userCount +
+	 * ", Reservation Time: " + revTime); } }
+	 * 
+	 * } catch (SQLException e) { System.err.println("사용자 예약 정보 조회 오류: " +
+	 * e.getMessage()); } }
+	 */
 
 
 	// 메뉴와 예약 정보를 `user_rsv_menu` 테이블에 저장하는 메소드
@@ -179,7 +155,7 @@ public class DatabaseHelper {
 	
 	// user_id를 파라미터로 받아 해당 유저의 예약정보 반환하는 메소드
 	// String[] info 는 {식당명, 예약시간} 순
-	// **한 유저가 여러 식장에 예약한 경우를 고려, 
+	// **한 유저가 여러 식당에 예약한 경우를 고려, 
 	// 예약들어간 식당 별 예약정보info 들을 ArrayList result에 저장하여 반환
 	public static ArrayList<String[]> getAllRsvInfo(String userId) {
 		ArrayList<String[]> result = new ArrayList<>(); // info들의 List
@@ -282,20 +258,24 @@ public class DatabaseHelper {
 				// 2. 연결된 테이블 먼저 삭제
 				for (int rsvId : rsvIds) {
 					// user_rsv_menu 삭제
-					pstmt = conn.prepareStatement("DELETE FROM user_rsv_menu WHERE user_rsv_id = ?");
+					pstmt = conn.prepareStatement("DELETE "
+							+ "FROM user_rsv_menu "
+							+ "WHERE user_rsv_id = ?");
 					pstmt.setInt(1, rsvId);
 					pstmt.executeUpdate();
 					pstmt.close();
 
 					// admin_rsv 삭제
-					pstmt = conn.prepareStatement("DELETE FROM admin_rsv WHERE user_rsv_id = ?");
-					pstmt.setInt(1, rsvId);
-					pstmt.executeUpdate();
-					pstmt.close();
+					/*
+					 * pstmt = conn.prepareStatement("DELETE FROM admin_rsv WHERE user_rsv_id = ?");
+					 * pstmt.setInt(1, rsvId); pstmt.executeUpdate(); pstmt.close();
+					 */
 				}
 
 				// 3. user_rsv 삭제
-				pstmt = conn.prepareStatement("DELETE FROM user_rsv WHERE user_id = ?");
+				pstmt = conn.prepareStatement("DELETE "
+						+ "FROM user_rsv "
+						+ "WHERE user_id = ?");
 				pstmt.setString(1, userId);
 				int result = pstmt.executeUpdate(); // 성공한 행의 수 반환
 

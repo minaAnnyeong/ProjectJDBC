@@ -162,16 +162,15 @@ public class A05_ReservationTime extends JFrame {
 					if (result == JOptionPane.YES_OPTION) { // 유저가 YES를 누른경우
 						DatabaseHelper.userRsvVO.setRsvTime(dateSelected + " " + timeSelected);
 						// 콘솔확인용 //////////////////
-						System.out.println("<ReservationForm PrintOut>");
-						System.out.println("UserId: " + DatabaseHelper.userRsvVO.getUserId());
-						System.out.println("RestId: " + DatabaseHelper.userRsvVO.getRestId());
-						for (UserRsvMenuVO VOItem : DatabaseHelper.urmVOList) {
-							System.out.println(
-									"menuId: " + VOItem.getMenuId() + " / " + "menuCount: " + VOItem.getMenuCount());
-						}
-						System.out.println("UserCount: " + DatabaseHelper.userRsvVO.getUserCount());
-						System.out.println("RsvTime: " + DatabaseHelper.userRsvVO.getRsvTime());
-						System.out.println("UserRsvId: " + DatabaseHelper.userRsvVO.getUserRsvId());
+//						System.out.println("<ReservationForm PrintOut>");
+//						System.out.println("UserId: " + DatabaseHelper.userRsvVO.getUserId());
+//						System.out.println("RestId: " + DatabaseHelper.userRsvVO.getRestId());
+//						for (UserRsvMenuVO VOItem : DatabaseHelper.urmVOList) {
+//							System.out.println(
+//									"menuId: " + VOItem.getMenuId() + " / " + "menuCount: " + VOItem.getMenuCount());
+//						}
+//						System.out.println("UserCount: " + DatabaseHelper.userRsvVO.getUserCount());
+//						System.out.println("RsvTime: " + DatabaseHelper.userRsvVO.getRsvTime());
 						////////////////////////
 						
 						try {

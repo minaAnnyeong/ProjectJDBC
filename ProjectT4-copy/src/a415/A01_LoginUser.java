@@ -124,8 +124,10 @@ public class A01_LoginUser extends JFrame {
 
 						// 로그인 성공하면 VO객체 rsv_info에 유저id set
 						DatabaseHelper.userRsvVO.setUserId(id);
-						System.out.println("<LoginUser PrintOut>");
-						System.out.println("UserId: " + DatabaseHelper.userRsvVO.getUserId());
+						
+						// 콘솔 확인용 //////////
+//						System.out.println("<LoginUser PrintOut>");
+//						System.out.println("UserId: " + DatabaseHelper.userRsvVO.getUserId());
 
 						// 로그인 성공 후 로그인 화면 종료하고 SearchResta 화면으로 이동
 						dispose();
