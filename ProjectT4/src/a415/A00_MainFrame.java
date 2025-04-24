@@ -124,8 +124,6 @@ public class A00_MainFrame extends JFrame {
 		btnNewButton_3.setIcon(new ImageIcon(A00_MainFrame.class.getResource("/icons/iconmonstr-menu-square-lined-24.png")));
 		btnNewButton_3.setBounds(97, 528, 169, 52);
 		contentPane.add(btnNewButton_3);
-		
-		
-		
+			
 	}
 }
