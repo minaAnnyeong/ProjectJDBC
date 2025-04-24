@@ -3,6 +3,8 @@ package a415;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import db.DatabaseHelper;
 
 public class A00_MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +29,7 @@ public class A00_MainFrame extends JFrame {
 			public void run() {
 				try {
 					A00_MainFrame frame = new A00_MainFrame();
+					frame.setLocationRelativeTo(null); // 화면의 가운데에 창 띄우기
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,6 +43,8 @@ public class A00_MainFrame extends JFrame {
 	 */
 	
 	public A00_MainFrame() {
+		DatabaseHelper.urmVOList.clear(); // 유저가 예약한 메뉴 리스트 초기화
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 640);
 		contentPane = new JPanel();

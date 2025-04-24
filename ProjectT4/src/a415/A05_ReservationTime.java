@@ -183,11 +183,19 @@ public class A05_ReservationTime extends JFrame {
 										+ "예약자명: " + rsvInfo[1] + "<br>"
 										+ "예약시간: " + DatabaseHelper.userRsvVO.getRsvTime() + "</html>",
 										"", JOptionPane.CLOSED_OPTION);
+		                		
 		                	}
 		                	
 		                	for(UserRsvMenuVO VOItem : DatabaseHelper.urmVOList) {
 		                		DatabaseHelper.insertUserRsvMenu(DatabaseHelper.userRsvVO, VOItem);
 		                	}
+		                	
+		                	// 창 닫고 main 화면으로 돌아감
+		                	dispose(); 
+	        				setVisible(false); 
+	                		A00_MainFrame frame_main = new A00_MainFrame();
+	        				frame_main.setVisible(true); // 
+	        				frame_main.setLocationRelativeTo(null); // 창이 화면 가운데에 표시
 		                	
 		                } catch (ClassNotFoundException e1) {
 							// TODO Auto-generated catch block

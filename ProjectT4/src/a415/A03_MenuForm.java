@@ -34,6 +34,7 @@ public class A03_MenuForm extends JFrame {
 	private ArrayList<String> foodNames = new ArrayList<>();
 	private ArrayList<Integer> foodPrices = new ArrayList<>();
 	private ArrayList<String> foodImages = new ArrayList<>();
+	
 
 	// map<menuId, ArrayList>의 values 로 foodNames, foodPrices, foodImages 리스트 생성
 	LinkedHashMap<Integer, db.MenuInfo> map = DatabaseHelper.getRestMenu(DatabaseHelper.userRsvVO.getRestId());
@@ -61,6 +62,8 @@ public class A03_MenuForm extends JFrame {
 	 */
 
 	public A03_MenuForm() {
+		menuIdMenuCountMap.clear();
+		clickCountMap.clear();	
 		initializeUI();
 	}
 
@@ -111,7 +114,7 @@ public class A03_MenuForm extends JFrame {
 				// 누르면 선택한 메뉴 전체 초기화
 				// 1) menuIdMenuCountMap, clickCountMap 초기화
 				menuIdMenuCountMap.clear();
-				clickCountMap.clear();	////////////////
+				clickCountMap.clear();	
 				// 2) 선택한 메뉴 창 택스트필드 문구 초기화
 				textA.setText("");
 			}

@@ -92,6 +92,10 @@ public class C02_SignupComplete extends JFrame {
 						"가입되었습니다.", 
 						"가입완료", 
 						JOptionPane.PLAIN_MESSAGE);
+				// main화면으로 돌아감
+				A00_MainFrame frame_main = new A00_MainFrame();
+				frame_main.setVisible(true); // 
+				frame_main.setLocationRelativeTo(null); // 창이 화면 가운데에 표시
 			}
 		});
 		btn_confirm.setFont(new Font("굴림", Font.BOLD, 14));
