@@ -1,0 +1,11 @@
+#################################
+s
+
+TABLE admin_acc / TABLE resta_se
+
+admin_id 	admin_pw 		rest_id 	rest_name
+-------------------------------------------------
+'korean' 	'password1!'  	1  		'한식'
+'indian' 	'password1!'   	2 		 '인도식'
+'french' 	'password1!'   	3 	 	'프랑스식'
+
